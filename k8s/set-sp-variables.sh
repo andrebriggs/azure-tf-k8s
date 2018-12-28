@@ -1,0 +1,2 @@
+export TF_VAR_client_id=$AZURE_SP_APP_ID
+export TF_VAR_client_secret=$AZURE_SP_PASSWORD
