@@ -1,10 +1,4 @@
 # Configure the Microsoft Azure Provider
-provider "azurerm" {
-    subscription_id = "7060bca0-7a3c-44bd-b54c-4bb1e9facfac"
-    client_id       = "b1961b6e-eee9-4dfa-900f-7c27425656bc"
-    client_secret   = "17486635-591e-4175-ad8f-863ba68bc479"
-    tenant_id       = "72f988bf-86f1-41af-91ab-2d7cd011db47"
-}
 resource "azurerm_resource_group" "k8s" {
     name     = "${var.resource_group_name}"
     location = "${var.location}"

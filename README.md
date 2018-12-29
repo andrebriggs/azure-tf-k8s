@@ -54,8 +54,16 @@ If no errors then run. This may take several minutes to run
 terraform apply out.plan
 ```
 
-Finally once a successful insatll has happened run kubbectl to verify the nodes are running
+Finally once a successful install has happened run kubbectl to verify the nodes are running. To configure kubctl first run
 
+```
+echo "$(terraform output kube_config)" > ./azurek8s
+```
+then 
+```
+export KUBECONFIG=./azurek8s
+```
+Run the following to verify 
 ```
 kubectl get nodes
 ```

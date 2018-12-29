@@ -1,0 +1,7 @@
+k8s/.terraform
+k8s/out.plan
+k8s/terraform.tfstate
+k8s/terraform.tfstate.backup
+k8s/.terraform
+k8s/azurek8s
+.DS_Store
