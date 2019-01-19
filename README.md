@@ -63,6 +63,8 @@ then
 ```
 export KUBECONFIG=./azurek8s
 ```
+The above sets your kube config to this file. Consequently kubctl will only see this context when you run ```kubectl config get-contexts```
+
 Run the following to verify 
 ```
 kubectl get nodes
