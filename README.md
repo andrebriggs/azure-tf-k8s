@@ -23,7 +23,7 @@ Adjust the values for each key in [variables.tf](k8s/variables.tf) to your likin
 
 Please make sure the value fo the ssh_public_key exists. If not please create it by navigating to your ```~/.ssh``` directory and running ```ssh-keygen -o```
 
-### [k8s.tf](k8s/k8s.tf)
+### [main.tf](k8s/main.tf)
 This file defines the environment landscape you want to declaratively describe. The default file creates a resource group, log analytics, and an AKS cluster. Edit this file to your liking.
 
 ### [output.tf](k8s/output.tf)
@@ -31,17 +31,13 @@ This file describes the output variables you will see when Terraform applies a [
 
 
 ## Set service principal info for Terraform
-Run the shell script (set-sp-variables.sh)[k8s/set-sp-variables.sh] and replace or set the environment variables with teh output from creating the Azure Service Principal
+Run the shell script (set-sp-variables.sh)[k8s/set-sp-variables.sh] and replace or set the environment variables with the output from creating the Azure Service Principal
 
 ## How deploy with Terraform
 
 Typical Terraform commands are _init_, _plan_, then _apply_
 
-Run:
-
-```
-terraform init -backend-config="storage_account_name=$STORAGE_NAME" -backend-config="container_name=tfstate" -backend-config="access_key=$STORAGE_KEY" -backend-config="key=codelab.microsoft.tfstate"
-```
+Run the `terraform_init_backend.sh` file to setup your backend.
 
 Then run:
 
@@ -64,6 +60,11 @@ then
 export KUBECONFIG=./azurek8s
 ```
 The above sets your kube config to this file. Consequently kubctl will only see this context when you run ```kubectl config get-contexts```
+
+Alternatively if using AKS you can set the context to your cluster using the Azure CLI
+<pre>
+az aks get-credentials --resource-group <b>RESOURCE_GROUP_NAME_HERE</b> --name <b>CLUSTER_NAME_HERE</b> 
+</pre>
 
 Run the following to verify 
 ```

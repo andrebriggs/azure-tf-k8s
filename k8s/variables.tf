@@ -1,12 +1,18 @@
 variable "client_id" {}
 variable "client_secret" {}
 
+variable "kubernetes_version" {
+  type    = string
+  default = "1.14.8"
+}
+
 variable "agent_count" {
     default = 3
 }
 
 variable "ssh_public_key" {
     default = "~/.ssh/id_rsa.pub"
+    type = string
 }
 
 variable "dns_prefix" {
@@ -14,15 +20,13 @@ variable "dns_prefix" {
 }
 
 variable cluster_name {
+    description = "Name of the cluster"
     default = "abrigk8stest"
 }
 
-variable resource_group_name {
-    default = "abrig-terraform"
-}
-
-variable location {
-    default = "West US"
+variable resource_group_location {
+    description = "The Azure location we want resources to reside"
+    default = "westus"
 }
 
 variable log_analytics_workspace_name {
