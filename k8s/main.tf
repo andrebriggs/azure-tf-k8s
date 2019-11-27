@@ -8,10 +8,14 @@ terraform {
 
 # Configure the Microsoft Azure Provider
 
-# Reccomended to prevent automatic upgrades to new major versions that may contain breaking changes
+# Recomended to prevent automatic upgrades to new major versions that may contain breaking changes
 provider "azurerm" {
   version = "~>1.32.1"
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Create templated resource group name and AKS cluster name based on random strings 
+# ---------------------------------------------------------------------------------------------------------------------
 
 locals {
     resource_group_name = "abrig-temp-rg-${random_string.default.result}"
@@ -38,6 +42,10 @@ resource "random_string" "lower" {
   special = false
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# Deploy Azure Log Analytics that will be referenced from AKS install
+# ---------------------------------------------------------------------------------------------------------------------
+
 resource "azurerm_log_analytics_workspace" "test" {
     name                = var.log_analytics_workspace_name
     location            = var.log_analytics_workspace_location
@@ -57,6 +65,10 @@ resource "azurerm_log_analytics_solution" "test" {
         product   = "OMSGallery/ContainerInsights"
     }
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Deploy AKS instance that specifies VM SKU, service principal, and log analytics instance
+# ---------------------------------------------------------------------------------------------------------------------
 
 resource "azurerm_kubernetes_cluster" "k8s" {
     name                = local.cluster_name #var.cluster_name
