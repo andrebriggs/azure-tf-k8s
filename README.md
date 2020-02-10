@@ -87,6 +87,7 @@ Run the following to verify
 kubectl get nodes
 ```
 
+
 # How to tear down 
 
 Run ```az group delete --name $RESOURCE_GROUP_NAME```
